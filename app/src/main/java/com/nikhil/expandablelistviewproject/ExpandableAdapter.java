@@ -23,7 +23,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
     private HashMap<String, List<String>> _listDataChild;
 
     public ExpandableAdapter(Context context, List<String> listDataHeader,
-                                 HashMap<String, List<String>> listChildData) {
+                             HashMap<String, List<String>> listChildData) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
@@ -31,8 +31,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosititon) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
-                .get(childPosititon);
+        return this._listDataChild.get(this._listDataHeader.get(groupPosition)).get(childPosititon);
     }
 
     @Override
@@ -56,6 +55,14 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.lblListItem);
 
         txtListChild.setText(childText);
+
+
+        txtListChild.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)_context).goToNewActivity(childText);
+            }
+        });
         return convertView;
     }
 
